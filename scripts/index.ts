@@ -1,10 +1,6 @@
 import { Container, ItemStack, system, world } from "@minecraft/server";
 import { ModalFormData, ActionFormData } from "@minecraft/server-ui";
 import { config } from "./configs";
-import "./Forms/index";
-import "./Spawn/index";
-import "./Commands/index";
-import "./debug/index";
 
 world.beforeEvents.itemUse.subscribe((ev) => {
   if (world.getDynamicProperty("main") == true) {
