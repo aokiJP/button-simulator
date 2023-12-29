@@ -1,51 +1,112 @@
-import { Container, ItemStack, system, world } from "@minecraft/server";
+import { Container, Entity, ItemStack, Player, system, world } from "@minecraft/server";
 import { ModalFormData, ActionFormData } from "@minecraft/server-ui";
-import { config } from "./configs";
+import { config, properties } from "./configs";
 
 const overworld = world.getDimension("overworld");
 
 system.runInterval(() => {
-  for (const pos of config.buttonPos) {
-    let i = 0;
-    const player = overworld.getPlayers({ location: { x: pos.x, y: pos.y, z: pos.z } });
+  for (const button of config.buttonClasses.multiplayer) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
     if (!player) return;
     player.forEach((p) => {
-      const button = overworld.getEntities({ location: { x: pos.x, y: pos.y, z: pos.z }, families: [""] })[0];
-      const buttonProperty = {};
-      const buttonCount = Number(p.getDynamicProperty("buttonCount")) ?? 0;
-      p.sendMessage(``);
-      p.setDynamicProperty("buttonCount", buttonCount + 1);
-      switch (i) {
-        case 0: {
-          p.setDynamicProperty("multi", 1);
-          break;
-        }
-        case 1: {
-          p.setDynamicProperty("reb", 1);
-          break;
-        }
-        case 2: {
-          p.setDynamicProperty("", 1);
-          break;
-        }
-        case 3: {
-          p.setDynamicProperty("", 1);
-          break;
-        }
-        case 4: {
-          p.setDynamicProperty("", 1);
-          break;
-        }
-      }
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const money = getScore(p, properties.money);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.money, money - button.cost);
+      p.setDynamicProperty(properties.multiplayer, button.add * getScore(p, properties.rebirths));
     });
-    i++;
+  }
+  for (const button of config.buttonClasses.rebirths) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const multiplayer = getScore(p, properties.multiplayer);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.multiplayer, multiplayer - button.cost);
+      p.setDynamicProperty(properties.rebirths, button.add * getScore(p, properties.superRebirths));
+    });
+  }
+  for (const button of config.buttonClasses.superRebirths) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const rebirths = getScore(p, properties.rebirths);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.rebirths, rebirths - button.cost);
+      p.setDynamicProperty(properties.superRebirths, button.add * getScore(p, properties.rebirths));
+    });
+  }
+  for (const button of config.buttonClasses.ultra) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const superRebirths = getScore(p, properties.superRebirths);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.superRebirths, superRebirths - button.cost);
+      p.setDynamicProperty(properties.ultra, button.add * getScore(p, properties.rebirths));
+    });
+  }
+  for (const button of config.buttonClasses.prestige) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const ultra = getScore(p, properties.ultra);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.ultra, ultra - button.cost);
+      p.setDynamicProperty(properties.prestige, button.add * getScore(p, properties.rebirths));
+    });
+  }
+  for (const button of config.buttonClasses.grass) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const prestige = getScore(p, properties.prestige);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.prestige, prestige - button.cost);
+      p.setDynamicProperty(properties.grass, button.add * getScore(p, properties.rebirths));
+    });
+  }
+  for (const button of config.buttonClasses.plants) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const plants = getScore(p, properties.plants);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.plants, plants - button.cost);
+      p.setDynamicProperty(properties.flowers, button.add * getScore(p, properties.rebirths));
+    });
+  }
+  for (const button of config.buttonClasses.flowers) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const flowers = getScore(p, properties.flowers);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.flowers, flowers - button.cost);
+      p.setDynamicProperty(properties.bones, button.add * getScore(p, properties.rebirths));
+    });
   }
 }, 10);
 
 system.runInterval(() => {
   for (const player of world.getAllPlayers()) {
-    const cash = Number(player.getDynamicProperty("cash")) ?? 0;
-    player.setDynamicProperty("cash", cash + 1);
+    const cash = getScore(player, properties.money);
+    player.setDynamicProperty(properties.money, (cash + 1) * getScore(player, properties.multiplayer));
   }
 }, 20);
 
@@ -73,4 +134,8 @@ function getTime() {
   const Sec = new Date().getSeconds();
 
   return Year + "年" + Month + "月" + Date_ + "日" + Hour + ":" + Min + ":" + Sec;
+}
+
+function getScore(target: Player | Entity, object: string) {
+  return Number(target.getDynamicProperty(object)) ?? 0;
 }
