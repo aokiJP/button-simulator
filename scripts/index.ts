@@ -38,7 +38,7 @@ system.runInterval(() => {
       p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
       p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
       p.setDynamicProperty(properties.rebirths, rebirths - button.cost);
-      p.setDynamicProperty(properties.superRebirths, button.add * getScore(p, properties.rebirths));
+      p.setDynamicProperty(properties.superRebirths, button.add * getScore(p, properties.ultra));
     });
   }
   for (const button of config.buttonClasses.ultra) {
@@ -50,7 +50,7 @@ system.runInterval(() => {
       p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
       p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
       p.setDynamicProperty(properties.superRebirths, superRebirths - button.cost);
-      p.setDynamicProperty(properties.ultra, button.add * getScore(p, properties.rebirths));
+      p.setDynamicProperty(properties.ultra, button.add * getScore(p, properties.prestige));
     });
   }
   for (const button of config.buttonClasses.prestige) {
@@ -62,7 +62,7 @@ system.runInterval(() => {
       p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
       p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
       p.setDynamicProperty(properties.ultra, ultra - button.cost);
-      p.setDynamicProperty(properties.prestige, button.add * getScore(p, properties.rebirths));
+      p.setDynamicProperty(properties.prestige, button.add * getScore(p, properties.grass));
     });
   }
   for (const button of config.buttonClasses.grass) {
@@ -74,7 +74,7 @@ system.runInterval(() => {
       p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
       p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
       p.setDynamicProperty(properties.prestige, prestige - button.cost);
-      p.setDynamicProperty(properties.grass, button.add * getScore(p, properties.rebirths));
+      p.setDynamicProperty(properties.grass, button.add * getScore(p, properties.plants));
     });
   }
   for (const button of config.buttonClasses.plants) {
@@ -82,14 +82,26 @@ system.runInterval(() => {
     if (!player) return;
     player.forEach((p) => {
       const buttonPressed = getScore(p, properties.player.buttonPressed);
-      const plants = getScore(p, properties.plants);
+      const grass = getScore(p, properties.grass);
       p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
       p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
-      p.setDynamicProperty(properties.plants, plants - button.cost);
-      p.setDynamicProperty(properties.flowers, button.add * getScore(p, properties.rebirths));
+      p.setDynamicProperty(properties.grass, grass - button.cost);
+      p.setDynamicProperty(properties.plants, button.add * getScore(p, properties.flowers));
     });
   }
   for (const button of config.buttonClasses.flowers) {
+    const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+    if (!player) return;
+    player.forEach((p) => {
+      const buttonPressed = getScore(p, properties.player.buttonPressed);
+      const plants = getScore(p, properties.plants);
+      p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
+      p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
+      p.setDynamicProperty(properties.plants, flowers - button.cost);
+      p.setDynamicProperty(properties.flowers, button.add * getScore(p, properties.bones));
+    });
+  }
+  for (const button of config.buttonClasses.bones) {
     const player = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
     if (!player) return;
     player.forEach((p) => {
@@ -98,7 +110,7 @@ system.runInterval(() => {
       p.sendMessage(`x: ${button.x}, y: ${button.y}, z: ${button.z}`);
       p.setDynamicProperty(properties.player.buttonPressed, buttonPressed + 1);
       p.setDynamicProperty(properties.flowers, flowers - button.cost);
-      p.setDynamicProperty(properties.bones, button.add * getScore(p, properties.rebirths));
+      p.setDynamicProperty(properties.bones, button.add);
     });
   }
 }, 10);
@@ -106,21 +118,15 @@ system.runInterval(() => {
 system.runInterval(() => {
   for (const player of world.getAllPlayers()) {
     const cash = getScore(player, properties.money);
-    player.setDynamicProperty(properties.money, (cash + 1) * getScore(player, properties.multiplayer));
-  }
-}, 20);
-
-system.runInterval(() => {
-  for (const player of world.getAllPlayers()) {
-    player.setDynamicProperty("");
+    player.setDynamicProperty(properties.money, (cash * getScore(player, properties.multiplayer) + 1));
   }
 }, 20);
 
 world.afterEvents.playerJoin.subscribe((ev) => {
   const { playerName } = ev;
   const player = overworld.getPlayers({ name: playerName })[0];
-  if (!player.getDynamicProperty("join")) player.setDynamicProperty("join", getTime());
-  const joinCount = Number(player.getDynamicProperty("joinCount")) ?? 0;
+  if (!player.getDynamicProperty("join")) player.setDynamicProperty(properties.player.join, getTime());
+  const joinCount = getScore(player, properties.player.joinCount)
   player.setDynamicProperty("joinCount", joinCount + 1);
   console.warn(getTime());
 });

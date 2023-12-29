@@ -8,15 +8,15 @@ interface Button {
 
 interface ButtonClasses {
   buttonClasses: {
-    multiplayer: Array<Button>;
-    rebirths: Array<Button>;
-    superRebirths: Array<Button>;
-    ultra: Array<Button>;
-    prestige: Array<Button>;
-    grass: Array<Button>;
-    plants: Array<Button>;
-    flowers: Array<Button>;
-    bones: Array<Button>;
+    multiplayer: Array < Button > ;
+    rebirths: Array < Button > ;
+    superRebirths: Array < Button > ;
+    ultra: Array < Button > ;
+    prestige: Array < Button > ;
+    grass: Array < Button > ;
+    plants: Array < Button > ;
+    flowers: Array < Button > ;
+    bones: Array < Button > ;
   };
 }
 
@@ -79,4 +79,4 @@ export const properties = {
   plants: "plants",
   flowers: "flowers",
   bones: "bones",
-};
+}
