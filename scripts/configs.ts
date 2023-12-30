@@ -8,15 +8,15 @@ interface Button {
 
 interface ButtonClasses {
   buttonClasses: {
-    multiplayer: Array < Button > ;
-    rebirths: Array < Button > ;
-    superRebirths: Array < Button > ;
-    ultra: Array < Button > ;
-    prestige: Array < Button > ;
-    grass: Array < Button > ;
-    plants: Array < Button > ;
-    flowers: Array < Button > ;
-    bones: Array < Button > ;
+    multiplayer: Array<Button>;
+    rebirths: Array<Button>;
+    superRebirths: Array<Button>;
+    ultra: Array<Button>;
+    prestige: Array<Button>;
+    grass: Array<Button>;
+    plants: Array<Button>;
+    flowers: Array<Button>;
+    bones: Array<Button>;
   };
 }
 
@@ -40,35 +40,6 @@ export const properties = {
     buttonPressed: "buttonPressed",
     joinCount: "joinCount",
   },
-  buttons: [
-    "100",
-    "250",
-    "750",
-    "3k",
-    "15k",
-    "75k",
-    "400k",
-    "20m",
-    "1b",
-    "49.9b",
-    "2t",
-    "60t",
-    "100qd",
-    "4qn",
-    "49.9qn",
-    "2sx",
-    "24.9sx",
-    "4.99sp",
-    "800sp",
-    "10oc",
-    "10no",
-    "1de",
-    "1ude",
-    "1dde",
-    "1tde",
-    "1.24qdde",
-    "1.8qnde",
-  ], // e51Now
   money: "money",
   multiplayer: "multiplayer",
   rebirths: "rebirths",
@@ -79,4 +50,4 @@ export const properties = {
   plants: "plants",
   flowers: "flowers",
   bones: "bones",
-}
+};
