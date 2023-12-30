@@ -1,0 +1,40 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "buttonAddon Ver0.0.1",
+    "description": "dev",
+    "uuid": "7426b1b0-1fe9-4963-86b9-d73a1fee3398",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 50]
+  },
+  "modules": [
+    {
+      "version": [1, 0, 0],
+      "type": "data",
+      "uuid": "87015594-6668-4918-8dd1-c85c81e7cf24",
+      "description": "data module"
+    },
+    {
+      "version": [1, 0, 0],
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/index.js",
+      "uuid": "89f49ffd-b20d-47f6-a99d-915dce9696ed",
+      "description": "script module"
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "1.8.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "1.2.0-beta"
+    },
+    {
+      "module_name": "@minecraft/server-gametest",
+      "version": "1.0.0-beta"
+    }
+  ]
+}

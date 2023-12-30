@@ -1,6 +1,6 @@
 // === CONFIGURABLE VARIABLES
 
-const bpfoldername = "ninzinFarmRPG";
+const bpfoldername = "buttonAddon";
 const useMinecraftPreview = false; // Whether to target the "Minecraft Preview" version of Minecraft vs. the main store version of Minecraft
 const useMinecraftDedicatedServer = false; // Whether to use Bedrock Dedicated Server - see https://www.minecraft.net/download/server/bedrock
 const dedicatedServerPath = "C:/mc/bds/1.19.0/"; // if using Bedrock Dedicated Server, where to find the extracted contents of the zip package
@@ -18,12 +18,12 @@ const worldsFolderName = useMinecraftDedicatedServer ? "worlds" : "minecraftWorl
 
 const activeWorldFolderName = useMinecraftDedicatedServer ? "Bedrock level" : bpfoldername + "world";
 
-const mcdir = useMinecraftDedicatedServer ?
-  dedicatedServerPath :
-  os.homedir() +
-  (useMinecraftPreview ?
-    "/Library/Application Support/mcpelauncher/games/com.mojang/" :
-    "/Library/Application Support/mcpelauncher/games/com.mojang/");
+const mcdir = useMinecraftDedicatedServer
+  ? dedicatedServerPath
+  : os.homedir() +
+    (useMinecraftPreview
+      ? "/Library/Application Support/mcpelauncher/games/com.mojang/"
+      : "/Library/Application Support/mcpelauncher/games/com.mojang/");
 
 function clean_build(callbackFunction) {
   del(["build/behavior_packs/", "build/resource_packs/"]).then(
@@ -233,7 +233,7 @@ function backup_localmc_world() {
 
 const deploy_localmc = gulp.series(
   clean_localmc,
-  function(callbackFunction) {
+  function (callbackFunction) {
     callbackFunction();
   },
   gulp.parallel(deploy_localmc_behavior_packs, deploy_localmc_resource_packs)
@@ -274,11 +274,11 @@ function startServer(callbackFunction) {
 
   let logBuffer = "";
 
-  let serverLogger = function(buffer) {
+  let serverLogger = function (buffer) {
     let incomingBuffer = buffer.toString();
 
     if (incomingBuffer.endsWith("\n")) {
-      (logBuffer + incomingBuffer).split(/\n/).forEach(function(message) {
+      (logBuffer + incomingBuffer).split(/\n/).forEach(function (message) {
         if (message) {
           if (message.indexOf("Server started.") >= 0) {
             activeServer.stdin.write("script debugger listen 19144\n");
