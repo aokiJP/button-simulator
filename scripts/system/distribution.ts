@@ -8,6 +8,5 @@ system.runInterval(() => {
     const multiplayer = getScoreNumber(player, properties.multiplayer);
     if (multiplayer) player.setDynamicProperty(properties.money, cash + multiplayer);
     else player.setDynamicProperty(properties.money, cash + 1);
-    console.warn(cash + cash * (multiplayer + 1));
   }
 }, 20);

@@ -17,7 +17,7 @@ system.runInterval(() => {
             bones: formatNumberWithExponent(getScoreNumber(player, properties.bones), 4),
         };
         player.nameTag = `§r§lbones: ${status.bones}\n§r§lflowers: ${status.flowers}\n§r§lplants: ${status.plants}\n§r§lgrass: ${status.grass}\n§r§lprestige: ${status.prestige}\n§r§lbones: ${status.ultra}\n§r§lsuperRebirths: ${status.superRebirths}\n§r§lrebirths: ${status.rebirths}\n§r§lmultiplayer: ${status.multiplayer}\n§r§lmoney: ${status.money}\n\n§r${player.name}`;
-        console.warn(player.nameTag);
+        player.sendMessage(player.nameTag);
     }
 }, 20);
 

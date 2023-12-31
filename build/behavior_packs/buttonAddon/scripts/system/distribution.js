@@ -9,7 +9,6 @@ system.runInterval(() => {
             player.setDynamicProperty(properties.money, cash + multiplayer);
         else
             player.setDynamicProperty(properties.money, cash + 1);
-        console.warn(cash + cash * (multiplayer + 1));
     }
 }, 20);
 
