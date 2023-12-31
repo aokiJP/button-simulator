@@ -2,14 +2,14 @@
   "format_version": "1.8.0",
   "minecraft:client_entity": {
     "description": {
-      "identifier": "au:button1",
-      "materials": { "default": "button1" },
+      "identifier": "au:multiplayer",
+      "materials": { "default": "multiplayer" },
       "textures": {
         "default": "textures/models/0.png",
         "buy": "textures/models/1.png"
       },
       "geometry": {
-        "default": "geometry.button"
+        "default": "geometry.multiplayer"
       },
       "render_controllers": ["controller.render.button"],
       "spawn_egg": {

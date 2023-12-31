@@ -2,16 +2,19 @@
   "format_version": "1.13.0",
   "minecraft:entity": {
     "description": {
-      "identifier": "an:button1",
+      "identifier": "an:multiplayer",
       "is_spawnable": true,
       "is_summonable": true,
       "is_experimental": false
     },
 
     "components": {
-      "minecraft:nameable": {},
+      "minecraft:nameable": {
+        "always_show": true,
+        "allow_name_tag_renaming": false
+      },
       "minecraft:collision_box": { "width": 0, "height": 0 },
-      "minecraft:type_family": { "family": ["button1"] },
+      "minecraft:type_family": { "family": ["multiplayer"] },
       "minecraft:scale": { "value": 1 },
       "minecraft:jump.static": {},
       "minecraft:behavior.float": { "priority": 0 },
