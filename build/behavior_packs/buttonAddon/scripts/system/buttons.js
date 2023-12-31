@@ -9,8 +9,8 @@ system.runInterval(() => {
 }, 10);
 function processButtons(buttons, costProperty, addProperty, multiplierProperty) {
     for (const button of buttons) {
-        //const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z }, maxDistance: 1 });
-        const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
+        const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z }, maxDistance: 1 });
+        //const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
         if (players) {
             players.forEach((p) => {
                 const cost = button.cost;

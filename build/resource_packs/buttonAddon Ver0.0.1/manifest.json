@@ -1,0 +1,18 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "buttonAddon Ver0.0.1",
+    "name": "horror addon",
+    "uuid": "1fae04ea-a2db-4bab-8025-dac46e087104",
+    "version": [1, 0, 1],
+    "min_engine_version": [1, 17, 0]
+  },
+  "modules": [
+    {
+      "description": "buttonAddon Ver0.0.1",
+      "type": "resources",
+      "uuid": "ac9ed963-25bf-4137-9638-baa979de28a7",
+      "version": [1, 0, 1]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.button": {
+      "arrays": {
+        "textures": {
+          "Array.buttons": [
+            "Texture.default",
+            "Texture.buy"
+          ]
+        }
+      },
+      "materials": [{ "*": "Material.default" }],
+      "geometry": "Geometry.default",
+      "textures": ["Array.buttons[v.button ? 1 : 0]"]
+    }
+  }
+}

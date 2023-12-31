@@ -1,0 +1,17 @@
+{
+    "format_version": "1.14.0",
+    "sound_definitions": {
+        "music.button": {
+            "category": "music",
+            "max_distance": null,
+            "min_distance": null,
+            "__use_legacy_mac_distance": true,
+            "load_on_low_memory" : true,
+            "sounds": [
+                {
+                    "name": "sounds/music/aquamarine"
+                }
+            ]
+        }
+    }
+}

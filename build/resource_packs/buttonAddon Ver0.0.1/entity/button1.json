@@ -1,0 +1,21 @@
+{
+  "format_version": "1.8.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "au:button1",
+      "materials": { "default": "button1" },
+      "textures": {
+        "default": "textures/models/0.png",
+        "buy": "textures/models/1.png"
+      },
+      "geometry": {
+        "default": "geometry.button"
+      },
+      "render_controllers": ["controller.render.button"],
+      "spawn_egg": {
+        "base_color": "#808080",
+        "overlay_color": "#797979"
+      }
+    }
+  }
+}
