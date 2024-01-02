@@ -3,10 +3,12 @@ import { getScoreNumber } from "../lib/getScore";
 import { properties } from "../configs";
 
 system.runInterval(() => {
-  for (const player of world.getPlayers()) {
-    const cash = getScoreNumber(player, properties.money);
-    const multiplayer = getScoreNumber(player, properties.multiplayer);
-    if (multiplayer) player.setDynamicProperty(properties.money, cash + multiplayer);
-    else player.setDynamicProperty(properties.money, cash + 1);
+  for (const player of world.getAllPlayers()) {
+    const cash: number = getScoreNumber(player, properties.money);
+    const multiplayer: number = getScoreNumber(player, properties.multiplayer);
+    if (multiplayer) {
+      player.setDynamicProperty(properties.money, cash + multiplayer);
+    } else player.setDynamicProperty(properties.money, cash + 1);
+    player.setDynamicProperty(properties.multiplayer, multiplayer + 1);
   }
-}, 20);
+}, 2);

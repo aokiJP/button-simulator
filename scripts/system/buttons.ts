@@ -1,6 +1,7 @@
 import { system, world } from "@minecraft/server";
 import { properties, Button, buttonConfigs } from "../configs";
 import { getScoreNumber } from "../lib/getScore";
+import {} from "../lib/formatNumber";
 
 const overworld = world.getDimension("overworld");
 
@@ -18,7 +19,6 @@ function processButtons(
 ): void {
   for (const button of buttons) {
     const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z }, maxDistance: 1 });
-    //const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z } });
 
     if (players) {
       players.forEach((p) => {
@@ -27,17 +27,18 @@ function processButtons(
 
         if (costScore < cost) return;
 
+        p.playSound("random.orb");
+
         const buttonPressed = getScoreNumber(p, properties.playerInf.buttonPressed);
-        const currentScore = getScoreNumber(p, costProperty);
 
         p.setDynamicProperty(properties.playerInf.buttonPressed, buttonPressed + 1);
-        p.setDynamicProperty(costProperty, currentScore - cost);
+        p.setDynamicProperty(costProperty, 0);
 
         if (multiplierProperty) {
           const multiplier = getScoreNumber(p, multiplierProperty);
-          p.setDynamicProperty(addProperty, getScoreNumber(p, addProperty) + button.add * (multiplier + 1));
+          p.setDynamicProperty(addProperty, (getScoreNumber(p, addProperty) + button.add * (multiplier + 1)) * 2);
         } else {
-          p.setDynamicProperty(addProperty, getScoreNumber(p, addProperty) + button.add);
+          p.setDynamicProperty(addProperty, (getScoreNumber(p, addProperty) + button.add) * 2);
         }
       });
     }
