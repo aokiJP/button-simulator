@@ -4,11 +4,12 @@ export function formatNumberWithExponent(num) {
     }
     const exponent = Math.floor(Math.log10(num) / 3) * 3;
     const coefficient = (num / Math.pow(10, exponent)).toFixed(2);
+    const roundedCoefficient = parseFloat(coefficient).toFixed(2);
     if (exponent === 0) {
-        return num.toString();
+        return roundedCoefficient;
     }
     else {
-        return `${coefficient}e${exponent}`;
+        return `${roundedCoefficient}e${exponent}`;
     }
 }
 

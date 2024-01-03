@@ -1,6 +1,6 @@
 import { system, world } from "@minecraft/server";
 import { getScoreNumber } from "../lib/getScore";
-import { buttonConfigs, config, properties } from "../configs";
+import { properties } from "../configs";
 import { formatNumberWithExponent } from "../lib/formatNumber";
 
 system.runInterval(() => {

@@ -1,5 +1,5 @@
 import { world } from "@minecraft/server";
-import { properties } from "../configs";
+import { gains, properties } from "../configs";
 
 const prefix = "!";
 
@@ -9,16 +9,12 @@ world.beforeEvents.chatSend.subscribe((ev) => {
   ev.cancel = true;
   switch (message) {
     case "!reset": {
-      player.setDynamicProperty(properties.money, 0);
-      player.setDynamicProperty(properties.multiplayer, 0);
-      player.setDynamicProperty(properties.rebirths, 0);
-      player.setDynamicProperty(properties.superRebirths, 0);
-      player.setDynamicProperty(properties.ultra, 0);
-      player.setDynamicProperty(properties.prestige, 0);
-      player.setDynamicProperty(properties.grass, 0);
-      player.setDynamicProperty(properties.plants, 0);
-      player.setDynamicProperty(properties.flowers, 0);
-      player.setDynamicProperty(properties.bones, 0);
+      for (const Class in properties) {
+        player.setDynamicProperty(Class, 0);
+      }
+      for (const gain of Object.values(gains)) {
+        player.setDynamicProperty(gain, 0);
+      }
       break;
     }
   }
