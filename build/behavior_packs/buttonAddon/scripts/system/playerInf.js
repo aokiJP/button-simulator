@@ -1,7 +1,6 @@
 import { world, system } from "@minecraft/server";
 import { getScoreNumber } from "../lib/getScore";
 import { properties } from "../configs";
-import { getTime } from "../lib/getTime";
 const musicOptions = {
     fade: 0.5,
     loop: true,
@@ -12,12 +11,11 @@ world.afterEvents.playerJoin.subscribe((ev) => {
     system.runTimeout(() => {
         const { playerName } = ev;
         const player = overworld.getPlayers({ name: playerName })[0];
-        player.sendMessage("a");
-        if (!player.getDynamicProperty(properties.playerInf.join))
-            player.setDynamicProperty(properties.playerInf.join, getTime());
+        // if (!player.getDynamicProperty(properties.playerInf.join))
+        //   player.setDynamicProperty(properties.playerInf.join, getTime());
         const joinCount = getScoreNumber(player, properties.playerInf.joinCount);
         player.setDynamicProperty("joinCount", joinCount + 1);
-        world.playMusic("music.button", musicOptions);
+        player.playMusic("music.button", musicOptions);
     }, 100);
 });
 

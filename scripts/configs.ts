@@ -6,6 +6,7 @@ export interface Button {
 
 interface ButtonClasses {
   buttonClasses: {
+    point: Array<Button>;
     multiplayer: Array<Button>;
     rebirths: Array<Button>;
     superRebirths: Array<Button>;
@@ -61,8 +62,31 @@ export const buttonCost: Array<ButtonCost> = [
   { cost: 30e72, add: 20e18 },
 ];
 
+export const buttonCostPoint: Array<ButtonCost> = [
+  { cost: 1e21, add: 0.1 },
+  { cost: 1e18, add: 10 },
+  { cost: 1e15, add: 500 },
+  { cost: 1e12, add: 1e3 },
+  { cost: 1e9, add: 1e6 },
+  { cost: 1e6, add: 1e9 },
+  { cost: 1e3, add: 1e12 },
+  { cost: 0.5e3, add: 1e15 },
+  { cost: 0.1e3, add: 1e18 },
+];
+
 export const config: ButtonClasses = {
   buttonClasses: {
+    point: [
+      { x: -2, y: -60, z: 0 },
+      { x: -2, y: -60, z: 2 },
+      { x: -2, y: -60, z: 4 },
+      { x: -2, y: -60, z: 6 },
+      { x: -2, y: -60, z: 8 },
+      { x: -2, y: -60, z: 10 },
+      { x: -2, y: -60, z: 12 },
+      { x: -2, y: -60, z: 14 },
+      { x: -2, y: -60, z: 16 },
+    ],
     multiplayer: [
       { x: 0, y: -60, z: 0 },
       { x: 0, y: -60, z: 2 },
@@ -400,6 +424,7 @@ export const config: ButtonClasses = {
 };
 
 export const properties = {
+  point: "point",
   money: "money",
   multiplayer: "multiplayer",
   rebirths: "rebirths",
@@ -450,6 +475,12 @@ export const buttonConfigs = [
     multiplierProp: properties.rebirths,
   },
   {
+    buttons: config.buttonClasses.multiplayer,
+    costProp: properties.money,
+    addProp: properties.multiplayer,
+    multiplierProp: properties.rebirths,
+  },
+  {
     buttons: config.buttonClasses.rebirths,
     costProp: properties.multiplayer,
     addProp: properties.rebirths,
@@ -492,4 +523,11 @@ export const buttonConfigs = [
     multiplierProp: properties.bones,
   },
   { buttons: config.buttonClasses.bones, costProp: properties.flowers, addProp: properties.bones },
+];
+
+export const buttonConfigPoints = [
+  {
+    buttons: config.buttonClasses.point,
+    addProp: properties.point,
+  },
 ];

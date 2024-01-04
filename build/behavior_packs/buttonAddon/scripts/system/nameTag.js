@@ -5,6 +5,7 @@ import { formatNumberWithExponent } from "../lib/formatNumber";
 system.runInterval(() => {
     for (const player of world.getAllPlayers()) {
         const status = {
+            point: formatNumberWithExponent(getScoreNumber(player, properties.point)),
             money: formatNumberWithExponent(getScoreNumber(player, properties.money)),
             multiplayer: formatNumberWithExponent(getScoreNumber(player, properties.multiplayer)),
             rebirths: formatNumberWithExponent(getScoreNumber(player, properties.rebirths)),
@@ -16,7 +17,7 @@ system.runInterval(() => {
             flowers: formatNumberWithExponent(getScoreNumber(player, properties.flowers)),
             bones: formatNumberWithExponent(getScoreNumber(player, properties.bones)),
         };
-        player.nameTag = `§r§lbones: ${status.bones}\n§r§l§6flowers: ${status.flowers}\n§r§l§eplants: ${status.plants}\n§r§l§agrass: ${status.grass}\n§r§l§bprestige: ${status.prestige}\n§r§l§dultra: ${status.ultra}\n§r§l§2superRebirths: ${status.superRebirths}\n§r§l§1rebirths: ${status.rebirths}\n§r§l§cmultiplayer: ${status.multiplayer}\n§r§l§amoney: ${status.money}\n\n§r${player.name}`;
+        player.nameTag = `§r§lbones: ${status.bones}\n§r§l§6flowers: ${status.flowers}\n§r§l§eplants: ${status.plants}\n§r§l§agrass: ${status.grass}\n§r§l§bprestige: ${status.prestige}\n§r§l§dultra: ${status.ultra}\n§r§l§2superRebirths: ${status.superRebirths}\n§r§l§1rebirths: ${status.rebirths}\n§r§l§cmultiplayer: ${status.multiplayer}\n§r§l§amoney: ${status.money}\n§r§lpoint: ${status.point}\n\n§r${player.name}`;
         player.onScreenDisplay.setActionBar(player.nameTag);
     }
 }, 2);

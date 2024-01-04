@@ -1,13 +1,22 @@
 import { system, world } from "@minecraft/server";
-import { properties, buttonConfigs, buttonCost } from "../configs";
+import { properties, buttonConfigs, buttonCost, buttonConfigPoints, propertiesArray, buttonCostPoint, } from "../configs";
 import { getScoreNumber } from "../lib/getScore";
 let i = 0;
+let j = 0;
 const overworld = world.getDimension("overworld");
 system.runInterval(() => {
     for (const { buttons, costProp, addProp, multiplierProp } of buttonConfigs) {
         processButtons(buttons, costProp, addProp, multiplierProp);
     }
+    for (const { buttons, addProp } of buttonConfigPoints) {
+        processButtonsPoint(buttons, addProp);
+    }
 }, 10);
+system.runInterval(() => {
+    for (const { buttons, addProp } of buttonConfigPoints) {
+        processButtonsPoint(buttons, addProp);
+    }
+}, 20);
 function processButtons(buttons, costProperty, addProperty, multiplierProperty) {
     for (const button of buttons) {
         const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z }, maxDistance: 1 });
@@ -42,32 +51,32 @@ function processButtons(buttons, costProperty, addProperty, multiplierProperty) 
                             break;
                         }
                         case "ultra": {
-                            cost *= 2.5;
+                            cost *= 10;
                             add *= 1;
                             break;
                         }
                         case "prestige": {
-                            cost *= 3;
+                            cost *= 15;
                             add *= 1;
                             break;
                         }
                         case "grass": {
-                            cost *= 3.5;
+                            cost *= 20;
                             add *= 1;
                             break;
                         }
                         case "plants": {
-                            cost *= 4;
+                            cost *= 25;
                             add *= 1;
                             break;
                         }
                         case "flowers": {
-                            cost *= 4.5;
+                            cost *= 50;
                             add *= 1;
                             break;
                         }
                         case "bones": {
-                            cost *= 5;
+                            cost *= 100;
                             add *= 1;
                             break;
                         }
@@ -82,6 +91,26 @@ function processButtons(buttons, costProperty, addProperty, multiplierProperty) 
         i++;
     }
     i = 0;
+}
+function processButtonsPoint(buttons, addProperty) {
+    for (const button of buttons) {
+        const players = overworld.getPlayers({ location: { x: button.x, y: button.y, z: button.z }, maxDistance: 1 });
+        if (players) {
+            players.forEach((p) => {
+                let cost = buttonCostPoint[j].cost;
+                let add = buttonCostPoint[j].add;
+                const costScore = getScoreNumber(p, propertiesArray[j]);
+                if (costScore < cost)
+                    return;
+                p.playSound("random.orb");
+                const buttonPressed = getScoreNumber(p, properties.playerInf.buttonPressed);
+                p.setDynamicProperty(properties.playerInf.buttonPressed, buttonPressed + 1);
+                p.setDynamicProperty(addProperty, getScoreNumber(p, addProperty) + add);
+            });
+        }
+        j++;
+    }
+    j = 0;
 }
 
 //# sourceMappingURL=../../../_buttonAddonDebug/system/buttons.js.map

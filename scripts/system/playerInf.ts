@@ -15,10 +15,10 @@ world.afterEvents.playerJoin.subscribe((ev) => {
   system.runTimeout(() => {
     const { playerName } = ev;
     const player: Player = overworld.getPlayers({ name: playerName })[0];
-    if (!player.getDynamicProperty(properties.playerInf.join))
-      player.setDynamicProperty(properties.playerInf.join, getTime());
+    // if (!player.getDynamicProperty(properties.playerInf.join))
+    //   player.setDynamicProperty(properties.playerInf.join, getTime());
     const joinCount: number = getScoreNumber(player, properties.playerInf.joinCount);
     player.setDynamicProperty("joinCount", joinCount + 1);
-    world.playMusic("music.button", musicOptions);
+    player.playMusic("music.button", musicOptions);
   }, 100);
 });
