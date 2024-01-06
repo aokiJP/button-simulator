@@ -439,6 +439,7 @@ export const properties = {
     join: "join",
     buttonPressed: "buttonPressed",
     joinCount: "joinCount",
+    joinTime: "joinTime",
   },
 };
 
@@ -455,8 +456,6 @@ export const propertiesArray = [
 ];
 
 export const gains = {
-  money: "moneyGains",
-  multiplayer: "multiplayerGains",
   rebirths: "rebirthsGains",
   superRebirths: "superRebirthsGains",
   ultra: "ultraGains",
@@ -468,12 +467,6 @@ export const gains = {
 };
 
 export const buttonConfigs = [
-  {
-    buttons: config.buttonClasses.multiplayer,
-    costProp: properties.money,
-    addProp: properties.multiplayer,
-    multiplierProp: properties.rebirths,
-  },
   {
     buttons: config.buttonClasses.multiplayer,
     costProp: properties.money,
@@ -529,5 +522,23 @@ export const buttonConfigPoints = [
   {
     buttons: config.buttonClasses.point,
     addProp: properties.point,
+  },
+];
+
+export const obbyStatus = [
+  {
+    name: "EventA",
+    magnification: {
+      multiplayer: 10,
+    },
+  },
+];
+
+export const eventStatus = [
+  {
+    name: "EventB",
+    magnification: {
+      money: 100,
+    },
   },
 ];

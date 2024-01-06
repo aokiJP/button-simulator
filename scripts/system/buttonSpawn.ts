@@ -6,99 +6,101 @@ let i: number = 0;
 
 const overworld = world.getDimension("overworld");
 
-system.runInterval(() => {
-  for (const [key, buttons] of Object.entries(config.buttonClasses)) {
-    for (const button of buttons) {
-      const cost = key == "point" ? buttonCostPoint[i]?.cost : buttonCost[i]?.cost;
-      const location: Vector3 = { x: button.x, y: button.y, z: button.z };
+system.runTimeout(() => {
+  system.runInterval(() => {
+    for (const [key, buttons] of Object.entries(config.buttonClasses)) {
+      for (const button of buttons) {
+        const cost = key == "point" ? buttonCostPoint[i]?.cost : buttonCost[i]?.cost;
+        const location: Vector3 = { x: button.x, y: button.y, z: button.z };
 
-      if ([...overworld.getEntities({ location: location, maxDistance: 1, families: ["multiplayer"] })].length)
-        continue;
+        if ([...overworld.getEntities({ location: location, maxDistance: 1, families: ["multiplayer"] })].length)
+          continue;
 
-      //const entity: Entity = overworld.spawnEntity(`an:${key}`, location);
-      const entity: Entity = overworld?.spawnEntity(`an:multiplayer`, location);
+        //const entity: Entity = overworld.spawnEntity(`an:${key}`, location);
+        const entity: Entity = overworld?.spawnEntity(`an:multiplayer`, location);
 
-      if (key == "point") {
-        switch (i) {
-          case 0: {
-            entity.nameTag = `§l§c${formatNumberWithExponent(cost)}`;
-            break;
+        if (key == "point") {
+          switch (i) {
+            case 0: {
+              entity.nameTag = `§l§c${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 1: {
+              entity.nameTag = `§l§1${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 2: {
+              entity.nameTag = `§l§2${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 3: {
+              entity.nameTag = `§l§d${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 4: {
+              entity.nameTag = `§l§b${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 5: {
+              entity.nameTag = `§l§a${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 6: {
+              entity.nameTag = `§l§e${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 7: {
+              entity.nameTag = `§l§6${formatNumberWithExponent(cost)}`;
+              break;
+            }
+            case 8: {
+              entity.nameTag = `§l${formatNumberWithExponent(cost)}`;
+              break;
+            }
           }
-          case 1: {
-            entity.nameTag = `§l§1${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 2: {
-            entity.nameTag = `§l§2${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 3: {
-            entity.nameTag = `§l§d${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 4: {
-            entity.nameTag = `§l§b${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 5: {
-            entity.nameTag = `§l§a${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 6: {
-            entity.nameTag = `§l§e${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 7: {
-            entity.nameTag = `§l§6${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case 8: {
-            entity.nameTag = `§l${formatNumberWithExponent(cost)}`;
-            break;
+        } else {
+          switch (key) {
+            case "multiplayer": {
+              entity.nameTag = `§l§c${formatNumberWithExponent(cost * 1)}`;
+              break;
+            }
+            case "rebirths": {
+              entity.nameTag = `§l§1${formatNumberWithExponent(cost * 5)}`;
+              break;
+            }
+            case "superRebirths": {
+              entity.nameTag = `§l§2${formatNumberWithExponent(cost * 40)}`;
+              break;
+            }
+            case "ultra": {
+              entity.nameTag = `§l§d${formatNumberWithExponent(cost * 80)}`;
+              break;
+            }
+            case "prestige": {
+              entity.nameTag = `§l§b${formatNumberWithExponent(cost * 120)}`;
+              break;
+            }
+            case "grass": {
+              entity.nameTag = `§l§a${formatNumberWithExponent(cost * 150)}`;
+              break;
+            }
+            case "plants": {
+              entity.nameTag = `§l§e${formatNumberWithExponent(cost * 180)}`;
+              break;
+            }
+            case "flowers": {
+              entity.nameTag = `§l§6${formatNumberWithExponent(cost * 210)}`;
+              break;
+            }
+            case "bones": {
+              entity.nameTag = `§l${formatNumberWithExponent(cost * 240)}`;
+              break;
+            }
           }
         }
-      } else {
-        switch (key) {
-          case "multiplayer": {
-            entity.nameTag = `§l§c${formatNumberWithExponent(cost)}`;
-            break;
-          }
-          case "rebirths": {
-            entity.nameTag = `§l§1${formatNumberWithExponent(cost * 1.5)}`;
-            break;
-          }
-          case "superRebirths": {
-            entity.nameTag = `§l§2${formatNumberWithExponent(cost * 2)}`;
-            break;
-          }
-          case "ultra": {
-            entity.nameTag = `§l§d${formatNumberWithExponent(cost * 10)}`;
-            break;
-          }
-          case "prestige": {
-            entity.nameTag = `§l§b${formatNumberWithExponent(cost * 15)}`;
-            break;
-          }
-          case "grass": {
-            entity.nameTag = `§l§a${formatNumberWithExponent(cost * 20)}`;
-            break;
-          }
-          case "plants": {
-            entity.nameTag = `§l§e${formatNumberWithExponent(cost * 25)}`;
-            break;
-          }
-          case "flowers": {
-            entity.nameTag = `§l§6${formatNumberWithExponent(cost * 50)}`;
-            break;
-          }
-          case "bones": {
-            entity.nameTag = `§l${formatNumberWithExponent(cost * 100)}`;
-            break;
-          }
-        }
+        i++;
       }
-      i++;
+      i = 0;
     }
-    i = 0;
-  }
-}, 20);
+  }, 20);
+}, 100);

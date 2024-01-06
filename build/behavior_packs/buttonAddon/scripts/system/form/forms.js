@@ -10,10 +10,12 @@ world.afterEvents.itemUse.subscribe((ev) => {
 export function menu(player) {
     const form = new ActionFormData();
     form.title(`§lMenu`);
-    form.body(`§l§${player.nameTag}`);
+    form.body(`§l${player.nameTag}`);
     form.button(`§l§cAuto Gain`);
     form.button(`§l§bPlayer Status`);
-    form.button(`§l§aObby`);
+    form.button(`§l§aLobby`);
+    form.button(`§l§dTeleport`);
+    form.button(`§l§eSetting`);
     form.show(player).then(({ selection, canceled }) => {
         if (canceled)
             return;
@@ -27,6 +29,15 @@ export function menu(player) {
                 break;
             }
             case 2: {
+                Form.lobby(player);
+                break;
+            }
+            case 3: {
+                Form.teleport(player);
+                break;
+            }
+            case 4: {
+                Form.setting(player);
                 break;
             }
         }

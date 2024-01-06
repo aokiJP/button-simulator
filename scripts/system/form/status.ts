@@ -1,7 +1,8 @@
 import { Player } from "@minecraft/server";
-import { ActionFormData, MessageFormData } from "@minecraft/server-ui";
+import { MessageFormData } from "@minecraft/server-ui";
 import { properties } from "../../configs";
 import { getScoreNumber } from "../../lib/getScore";
+import { Form } from "./configs";
 
 export function status(player: Player): void {
   const form = new MessageFormData();
@@ -14,5 +15,7 @@ export function status(player: Player): void {
   );
   form.button2(`§lreturn`);
   form.button1(`§lclose`);
-  form.show(player);
+  form.show(player).then(({ selection }) => {
+    if (selection) Form.menu(player);
+  });
 }

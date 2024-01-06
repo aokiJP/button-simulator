@@ -6,8 +6,8 @@ world.beforeEvents.chatSend.subscribe((ev) => {
     if (!message.startsWith(prefix))
         return;
     ev.cancel = true;
-    switch (message) {
-        case "!reset": {
+    switch (splitMessage(message)[0]) {
+        case "reset": {
             for (const Class in properties) {
                 player.setDynamicProperty(Class, 0);
             }
@@ -16,7 +16,22 @@ world.beforeEvents.chatSend.subscribe((ev) => {
             }
             break;
         }
+        case "add": {
+            const commands = splitMessage(message);
+            if (!(commands[1] || commands[2]))
+                return;
+            for (const Class in properties) {
+                if (Class == "playerInf" || Class !== commands[1])
+                    continue;
+                player.setDynamicProperty(Class, Number(commands[2]));
+            }
+            break;
+        }
     }
 });
+function splitMessage(input) {
+    const parts = input.slice(1).split(" ");
+    return parts;
+}
 
 //# sourceMappingURL=../../../_buttonAddonDebug/system/command.js.map
