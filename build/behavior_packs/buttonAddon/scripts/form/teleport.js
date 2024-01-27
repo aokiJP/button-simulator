@@ -1,25 +1,13 @@
 import { ActionFormData } from "@minecraft/server-ui";
-import { getScoreNumber } from "../../lib/getScore";
-const places = [
-    {
-        name: "a",
-        vector: {
-            x: 0,
-            y: 0,
-            z: 0,
-        },
-        require: {
-            money: 10e3,
-        },
-    },
-];
+import { getScoreNumber } from "../lib/getScore";
+import { teleportPlaces } from "../configs";
 export function teleport(player) {
     const form = new ActionFormData();
     form.title(`§l§dTeleport`);
-    for (const place of places) {
+    for (const place of teleportPlaces) {
         for (const [key, value] of Object.entries(place.require)) {
             const currentScore = getScoreNumber(player, key);
-            if (value > currentScore)
+            if (value < currentScore)
                 form.button(`${place.name}`);
         }
     }
@@ -28,9 +16,9 @@ export function teleport(player) {
             return;
         if (selection == undefined)
             return;
-        const vector = places[selection].vector;
+        const vector = teleportPlaces[selection].vector;
         player.teleport(vector);
     });
 }
 
-//# sourceMappingURL=../../../../_buttonAddonDebug/system/form/teleport.js.map
+//# sourceMappingURL=../../../_buttonAddonDebug/form/teleport.js.map

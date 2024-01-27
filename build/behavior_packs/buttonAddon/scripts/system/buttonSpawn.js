@@ -1,11 +1,11 @@
 import { system, world } from "@minecraft/server";
-import { buttonCost, buttonCostPoint, config } from "../configs";
+import { buttonCost, buttonCostPoint, position } from "../configs";
 import { formatNumberWithExponent } from "../lib/formatNumber";
 let i = 0;
 const overworld = world.getDimension("overworld");
 system.runTimeout(() => {
     system.runInterval(() => {
-        for (const [key, buttons] of Object.entries(config.buttonClasses)) {
+        for (const [key, buttons] of Object.entries(position.buttonClasses)) {
             for (const button of buttons) {
                 const cost = key == "point" ? buttonCostPoint[i]?.cost : buttonCost[i]?.cost;
                 const location = { x: button.x, y: button.y, z: button.z };

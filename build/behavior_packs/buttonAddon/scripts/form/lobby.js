@@ -1,10 +1,6 @@
 import { MessageFormData } from "@minecraft/server-ui";
 import { Form } from "./configs";
-const Lobby = {
-    x: 0,
-    y: 0,
-    z: 0,
-};
+import { Lobby } from "../configs";
 export function lobby(player) {
     const form = new MessageFormData();
     form.title(`§l§bLobby`);
@@ -19,4 +15,4 @@ export function lobby(player) {
     });
 }
 
-//# sourceMappingURL=../../../../_buttonAddonDebug/system/form/lobby.js.map
+//# sourceMappingURL=../../../_buttonAddonDebug/form/lobby.js.map

@@ -1,15 +1,7 @@
-import { world, MusicOptions, Dimension, Player, system } from "@minecraft/server";
+import { world, Player, system } from "@minecraft/server";
 import { getScoreNumber } from "../lib/getScore";
-import { properties } from "../configs";
+import { musicOptions, overworld, properties } from "../configs";
 import { getTime } from "../lib/getTime";
-
-export const musicOptions: MusicOptions = {
-  fade: 0.5,
-  loop: true,
-  volume: 1.0,
-};
-
-const overworld: Dimension = world.getDimension("overworld");
 
 world.afterEvents.playerJoin.subscribe((ev) => {
   system.runTimeout(() => {
@@ -27,6 +19,6 @@ world.afterEvents.playerJoin.subscribe((ev) => {
 
 system.runInterval(() => {
   for (const player of world.getAllPlayers()) {
-    player.setDynamicProperty(properties.playerInf.joinTime, 1);
+    player.setDynamicProperty(properties.playerInf.joinTime, getScoreNumber(player, properties.playerInf.joinTime) + 1);
   }
 }, 20);

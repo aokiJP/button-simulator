@@ -1,23 +1,28 @@
 import { system, world } from "@minecraft/server";
 import { getScoreNumber } from "../lib/getScore";
-import { properties } from "../configs";
+import { color, properties } from "../configs";
 import { formatNumberWithExponent } from "../lib/formatNumber";
 system.runInterval(() => {
+    let i = 0;
     for (const player of world.getAllPlayers()) {
-        const status = {
-            point: formatNumberWithExponent(getScoreNumber(player, properties.point)),
-            money: formatNumberWithExponent(getScoreNumber(player, properties.money)),
-            multiplayer: formatNumberWithExponent(getScoreNumber(player, properties.multiplayer)),
-            rebirths: formatNumberWithExponent(getScoreNumber(player, properties.rebirths)),
-            superRebirths: formatNumberWithExponent(getScoreNumber(player, properties.superRebirths)),
-            ultra: formatNumberWithExponent(getScoreNumber(player, properties.ultra)),
-            prestige: formatNumberWithExponent(getScoreNumber(player, properties.prestige)),
-            grass: formatNumberWithExponent(getScoreNumber(player, properties.grass)),
-            plants: formatNumberWithExponent(getScoreNumber(player, properties.plants)),
-            flowers: formatNumberWithExponent(getScoreNumber(player, properties.flowers)),
+        const statuses = {
             bones: formatNumberWithExponent(getScoreNumber(player, properties.bones)),
+            flowers: formatNumberWithExponent(getScoreNumber(player, properties.flowers)),
+            plants: formatNumberWithExponent(getScoreNumber(player, properties.plants)),
+            grass: formatNumberWithExponent(getScoreNumber(player, properties.grass)),
+            prestige: formatNumberWithExponent(getScoreNumber(player, properties.prestige)),
+            ultra: formatNumberWithExponent(getScoreNumber(player, properties.ultra)),
+            superRebirths: formatNumberWithExponent(getScoreNumber(player, properties.superRebirths)),
+            rebirths: formatNumberWithExponent(getScoreNumber(player, properties.rebirths)),
+            multiplayer: formatNumberWithExponent(getScoreNumber(player, properties.multiplayer)),
+            money: formatNumberWithExponent(getScoreNumber(player, properties.money)),
+            point: formatNumberWithExponent(getScoreNumber(player, properties.point)),
         };
-        player.nameTag = `§r§lbones: ${status.bones}\n§r§l§6flowers: ${status.flowers}\n§r§l§eplants: ${status.plants}\n§r§l§agrass: ${status.grass}\n§r§l§bprestige: ${status.prestige}\n§r§l§dultra: ${status.ultra}\n§r§l§2superRebirths: ${status.superRebirths}\n§r§l§1rebirths: ${status.rebirths}\n§r§l§cmultiplayer: ${status.multiplayer}\n§r§l§amoney: ${status.money}\n§r§lpoint: ${status.point}\n\n§r${player.name}`;
+        player.nameTag = "";
+        for (const [key, number] of Object.entries(statuses)) {
+            player.nameTag = player.nameTag + `${color[i]}${key}: ${number}\n`;
+            i++;
+        }
         player.onScreenDisplay.setActionBar(player.nameTag);
     }
 }, 2);

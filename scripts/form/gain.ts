@@ -1,9 +1,9 @@
 import { Player } from "@minecraft/server";
 import { ActionFormData, MessageFormData } from "@minecraft/server-ui";
-import { gains, properties, propertiesArray } from "../../configs";
-import { getScoreNumber } from "../../lib/getScore";
+import { gains, properties, propertiesArray } from "../configs";
+import { getScoreNumber } from "../lib/getScore";
 import { Form } from "./configs";
-import { formatNumberWithExponent } from "../../lib/formatNumber";
+import { formatNumberWithExponent } from "../lib/formatNumber";
 
 let GainString: string = "";
 let cost: number = 0;
@@ -54,27 +54,27 @@ export function gain(player: Player) {
     switch (selection + 1) {
       case 1: {
         GainString = propertiesArray[1];
-        cost = 10e3;
+        cost = 100;
         break;
       }
       case 2: {
         GainString = propertiesArray[2];
-        cost = 500e3;
+        cost = 100e3;
         break;
       }
       case 3: {
         GainString = propertiesArray[3];
-        cost = 2e6;
+        cost = 5e6;
         break;
       }
       case 4: {
         GainString = propertiesArray[4];
-        cost = 2e9;
+        cost = 10e6;
         break;
       }
       case 5: {
         GainString = propertiesArray[5];
-        cost = 2e12;
+        cost = 1e9;
         break;
       }
       case 6: {

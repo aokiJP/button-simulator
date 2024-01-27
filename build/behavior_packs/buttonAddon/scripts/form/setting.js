@@ -1,5 +1,5 @@
 import { ModalFormData } from "@minecraft/server-ui";
-import { musicOptions } from "../playerInf";
+import { musicOptions } from "../configs";
 export function setting(player) {
     const form = new ModalFormData();
     form.title(`§l§dSetting`);
@@ -33,4 +33,4 @@ export function setting(player) {
     });
 }
 
-//# sourceMappingURL=../../../../_buttonAddonDebug/system/form/setting.js.map
+//# sourceMappingURL=../../../_buttonAddonDebug/form/setting.js.map

@@ -9,7 +9,7 @@ import {
   buttonCostPoint,
 } from "../configs";
 import { getScoreNumber } from "../lib/getScore";
-import { magnification } from "./statuses";
+import { magnifications } from "./statuses";
 
 let i: number = 0;
 let j: number = 0;
@@ -145,7 +145,7 @@ function processButtons(
           const multiplier = getScoreNumber(p, multiplierProperty);
           p.setDynamicProperty(
             addProperty,
-            getScoreNumber(p, addProperty) + (add * ((multiplier + 1) * magnification[multiplierProperty])) / 3
+            getScoreNumber(p, addProperty) + (add * ((multiplier + 1) * magnifications[multiplierProperty])) / 3
           );
         }
       });

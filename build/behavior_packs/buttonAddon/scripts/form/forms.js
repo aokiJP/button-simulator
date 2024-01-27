@@ -16,6 +16,8 @@ export function menu(player) {
     form.button(`§l§aLobby`);
     form.button(`§l§dTeleport`);
     form.button(`§l§eSetting`);
+    form.button(`§l§9statusDetails`);
+    form.button(`§l§5Code`);
     form.show(player).then(({ selection, canceled }) => {
         if (canceled)
             return;
@@ -40,8 +42,16 @@ export function menu(player) {
                 Form.setting(player);
                 break;
             }
+            case 5: {
+                Form.details(player);
+                break;
+            }
+            case 6: {
+                Form.code(player);
+                break;
+            }
         }
     });
 }
 
-//# sourceMappingURL=../../../../_buttonAddonDebug/system/form/forms.js.map
+//# sourceMappingURL=../../../_buttonAddonDebug/form/forms.js.map

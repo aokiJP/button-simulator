@@ -1,10 +1,11 @@
 export function getTime() {
-  const Year = new Date().getFullYear();
-  const Month = new Date().getMonth() + 1;
-  const Date_ = new Date().getDate();
-  const Hour = new Date().getHours();
-  const Min = new Date().getMinutes();
-  const Sec = new Date().getSeconds();
+  const now = new Date();
+  const Year = now.getFullYear();
+  const Month = (now.getMonth() + 1).toString().padStart(2, "0");
+  const Date_ = now.getDate().toString().padStart(2, "0");
+  const Hour = now.getHours().toString().padStart(2, "0");
+  const Min = now.getMinutes().toString().padStart(2, "0");
+  const Sec = now.getSeconds().toString().padStart(2, "0");
 
   return Year + "年" + Month + "月" + Date_ + "日" + Hour + ":" + Min + ":" + Sec;
 }

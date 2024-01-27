@@ -1,8 +1,8 @@
 import { ActionFormData, MessageFormData } from "@minecraft/server-ui";
-import { gains, properties, propertiesArray } from "../../configs";
-import { getScoreNumber } from "../../lib/getScore";
+import { gains, properties, propertiesArray } from "../configs";
+import { getScoreNumber } from "../lib/getScore";
 import { Form } from "./configs";
-import { formatNumberWithExponent } from "../../lib/formatNumber";
+import { formatNumberWithExponent } from "../lib/formatNumber";
 let GainString = "";
 let cost = 0;
 export function gain(player) {
@@ -132,4 +132,4 @@ function shortage(player) {
     });
 }
 
-//# sourceMappingURL=../../../../_buttonAddonDebug/system/form/gain.js.map
+//# sourceMappingURL=../../../_buttonAddonDebug/form/gain.js.map

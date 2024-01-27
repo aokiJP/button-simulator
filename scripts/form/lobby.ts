@@ -1,12 +1,7 @@
 import { Player } from "@minecraft/server";
 import { MessageFormData } from "@minecraft/server-ui";
 import { Form } from "./configs";
-
-const Lobby = {
-  x: 0,
-  y: 0,
-  z: 0,
-};
+import { Lobby } from "../configs";
 
 export function lobby(player: Player): void {
   const form = new MessageFormData();

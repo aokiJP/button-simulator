@@ -1,7 +1,7 @@
 import { Player } from "@minecraft/server";
 import { MessageFormData } from "@minecraft/server-ui";
-import { properties } from "../../configs";
-import { getScoreNumber } from "../../lib/getScore";
+import { properties } from "../configs";
+import { getScoreNumber } from "../lib/getScore";
 import { Form } from "./configs";
 
 export function status(player: Player): void {
@@ -11,7 +11,10 @@ export function status(player: Player): void {
     `Player Status:\nJoinCount:${getScoreNumber(
       player,
       properties.playerInf.joinCount
-    )}\nButtonPressed:${getScoreNumber(player, properties.playerInf.buttonPressed)}`
+    )}\nButtonPressed:${getScoreNumber(player, properties.playerInf.buttonPressed)}\nJoinTime:${getScoreNumber(
+      player,
+      properties.playerInf.joinTime
+    )}`
   );
   form.button2(`§lreturn`);
   form.button1(`§lclose`);

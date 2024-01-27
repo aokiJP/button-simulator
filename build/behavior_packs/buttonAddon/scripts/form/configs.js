@@ -1,3 +1,5 @@
+import { code } from "./code";
+import { details1 } from "./details";
 import { menu } from "./forms";
 import { gain } from "./gain";
 import { lobby } from "./lobby";
@@ -11,6 +13,8 @@ export const Form = {
     setting: setting,
     lobby: lobby,
     teleport: teleport,
+    details: details1,
+    code: code,
 };
 
-//# sourceMappingURL=../../../../_buttonAddonDebug/system/form/configs.js.map
+//# sourceMappingURL=../../../_buttonAddonDebug/form/configs.js.map

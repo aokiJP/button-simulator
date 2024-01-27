@@ -1,6 +1,6 @@
 import { Player } from "@minecraft/server";
 import { ModalFormData } from "@minecraft/server-ui";
-import { musicOptions } from "../playerInf";
+import { musicOptions } from "../configs";
 
 export function setting(player: Player): void {
   const form = new ModalFormData();

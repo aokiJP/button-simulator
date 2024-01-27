@@ -1,3 +1,28 @@
+import { world } from "@minecraft/server";
+export const teleportPlaces = [
+    {
+        name: "a",
+        vector: {
+            x: 0,
+            y: 0,
+            z: 0,
+        },
+        require: {
+            money: 10e3,
+        },
+    },
+];
+export const overworld = world.getDimension("overworld");
+export const Lobby = {
+    x: 0,
+    y: 0,
+    z: 0,
+};
+export const musicOptions = {
+    fade: 0.5,
+    loop: true,
+    volume: 1.0,
+};
 export const buttonCost = [
     { cost: 150, add: 2 },
     { cost: 250, add: 6 },
@@ -46,7 +71,7 @@ export const buttonCostPoint = [
     { cost: 0.5e3, add: 1e15 },
     { cost: 0.1e3, add: 1e18 },
 ];
-export const config = {
+export const position = {
     buttonClasses: {
         point: [
             { x: -2, y: -60, z: 0 },
@@ -434,67 +459,10 @@ export const gains = {
     flowers: "flowersGains",
     bones: "bonesGains",
 };
-export const buttonConfigs = [
-    {
-        buttons: config.buttonClasses.multiplayer,
-        costProp: properties.money,
-        addProp: properties.multiplayer,
-        multiplierProp: properties.rebirths,
-    },
-    {
-        buttons: config.buttonClasses.rebirths,
-        costProp: properties.multiplayer,
-        addProp: properties.rebirths,
-        multiplierProp: properties.superRebirths,
-    },
-    {
-        buttons: config.buttonClasses.superRebirths,
-        costProp: properties.rebirths,
-        addProp: properties.superRebirths,
-        multiplierProp: properties.ultra,
-    },
-    {
-        buttons: config.buttonClasses.ultra,
-        costProp: properties.superRebirths,
-        addProp: properties.ultra,
-        multiplierProp: properties.prestige,
-    },
-    {
-        buttons: config.buttonClasses.prestige,
-        costProp: properties.ultra,
-        addProp: properties.prestige,
-        multiplierProp: properties.grass,
-    },
-    {
-        buttons: config.buttonClasses.grass,
-        costProp: properties.prestige,
-        addProp: properties.grass,
-        multiplierProp: properties.plants,
-    },
-    {
-        buttons: config.buttonClasses.plants,
-        costProp: properties.grass,
-        addProp: properties.plants,
-        multiplierProp: properties.flowers,
-    },
-    {
-        buttons: config.buttonClasses.flowers,
-        costProp: properties.plants,
-        addProp: properties.flowers,
-        multiplierProp: properties.bones,
-    },
-    { buttons: config.buttonClasses.bones, costProp: properties.flowers, addProp: properties.bones },
-];
-export const buttonConfigPoints = [
-    {
-        buttons: config.buttonClasses.point,
-        addProp: properties.point,
-    },
-];
 export const obbyStatus = [
     {
         name: "EventA",
-        magnification: {
+        magnifications: {
             multiplayer: 10,
         },
     },
@@ -502,10 +470,122 @@ export const obbyStatus = [
 export const eventStatus = [
     {
         name: "EventB",
-        magnification: {
+        magnifications: {
             money: 100,
         },
     },
+];
+export const codeStatus = [
+    {
+        name: "2024happyYEaR",
+        magnifications: {
+            money: 100,
+            multiplayer: 50,
+            rebirths: 25,
+            superRebirths: 12.5,
+            ultra: 6.25,
+        },
+    },
+    {
+        name: "2024happyYEaR",
+        magnifications: {
+            money: 100e200,
+            multiplayer: 50,
+            rebirths: 25,
+            superRebirths: 12.5,
+            ultra: 6.25,
+        },
+    },
+    {
+        name: "2024happyYEaR",
+        magnifications: {
+            money: 100,
+            multiplayer: 50,
+            rebirths: 25,
+            superRebirths: 12.5,
+            ultra: 6.25,
+        },
+    },
+    {
+        name: "2024happyYEaR",
+        magnifications: {
+            money: 100,
+            multiplayer: 50,
+            rebirths: 25,
+            superRebirths: 12.5,
+            ultra: 6.25,
+        },
+    },
+];
+export const buttonConfigs = [
+    {
+        buttons: position.buttonClasses.multiplayer,
+        costProp: properties.money,
+        addProp: properties.multiplayer,
+        multiplierProp: properties.rebirths,
+    },
+    {
+        buttons: position.buttonClasses.rebirths,
+        costProp: properties.multiplayer,
+        addProp: properties.rebirths,
+        multiplierProp: properties.superRebirths,
+    },
+    {
+        buttons: position.buttonClasses.superRebirths,
+        costProp: properties.rebirths,
+        addProp: properties.superRebirths,
+        multiplierProp: properties.ultra,
+    },
+    {
+        buttons: position.buttonClasses.ultra,
+        costProp: properties.superRebirths,
+        addProp: properties.ultra,
+        multiplierProp: properties.prestige,
+    },
+    {
+        buttons: position.buttonClasses.prestige,
+        costProp: properties.ultra,
+        addProp: properties.prestige,
+        multiplierProp: properties.grass,
+    },
+    {
+        buttons: position.buttonClasses.grass,
+        costProp: properties.prestige,
+        addProp: properties.grass,
+        multiplierProp: properties.plants,
+    },
+    {
+        buttons: position.buttonClasses.plants,
+        costProp: properties.grass,
+        addProp: properties.plants,
+        multiplierProp: properties.flowers,
+    },
+    {
+        buttons: position.buttonClasses.flowers,
+        costProp: properties.plants,
+        addProp: properties.flowers,
+        multiplierProp: properties.bones,
+    },
+    { buttons: position.buttonClasses.bones, costProp: properties.flowers, addProp: properties.bones },
+];
+export const buttonConfigPoints = [
+    {
+        buttons: position.buttonClasses.point,
+        addProp: properties.point,
+    },
+];
+export const color = [
+    "§r§l",
+    "§r§l§6",
+    "§r§l§e",
+    "§r§l§a",
+    "§r§l§b",
+    "§r§l§d",
+    "§r§l§2",
+    "§r§l§1",
+    "§r§l§c",
+    "§r§l§a",
+    "§r§l",
 ];
 
 //# sourceMappingURL=../../_buttonAddonDebug/configs.js.map

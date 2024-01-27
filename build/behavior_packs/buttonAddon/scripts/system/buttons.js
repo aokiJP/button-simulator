@@ -1,7 +1,7 @@
 import { system, world } from "@minecraft/server";
 import { properties, buttonConfigs, buttonCost, buttonConfigPoints, propertiesArray, buttonCostPoint, } from "../configs";
 import { getScoreNumber } from "../lib/getScore";
-import { magnification } from "./statuses";
+import { magnifications } from "./statuses";
 let i = 0;
 let j = 0;
 const overworld = world.getDimension("overworld");
@@ -122,7 +122,7 @@ function processButtons(buttons, costProperty, addProperty, multiplierProperty) 
                 p.setDynamicProperty(properties.playerInf.buttonPressed, buttonPressed + 1);
                 if (multiplierProperty) {
                     const multiplier = getScoreNumber(p, multiplierProperty);
-                    p.setDynamicProperty(addProperty, getScoreNumber(p, addProperty) + (add * ((multiplier + 1) * magnification[multiplierProperty])) / 3);
+                    p.setDynamicProperty(addProperty, getScoreNumber(p, addProperty) + (add * ((multiplier + 1) * magnifications[multiplierProperty])) / 3);
                 }
             });
         }
